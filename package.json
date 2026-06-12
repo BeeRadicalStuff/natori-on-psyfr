@@ -1,0 +1,12 @@
+{
+  "name": "psyfr",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NATORI-ON-PSYFR Predictive Chronology Engine — ARCHAIX/Ophis × Chronicon, single-file & offline.",
+  "scripts": {
+    "verify": "node test/verify.js",
+    "runtime": "node test/runtime.js",
+    "test": "node test/verify.js && node test/runtime.js"
+  },
+  "license": "UNLICENSED"
+}
