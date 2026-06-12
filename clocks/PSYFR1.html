@@ -194,6 +194,29 @@
   .opchip{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--cyan);border:1px solid rgba(84,184,201,.35);border-radius:3px;padding:2px 5px;white-space:nowrap}
   .convsel{background:#05050a;border:1px solid var(--line);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 9px;border-radius:3px;cursor:pointer}
 
+  /* ---------- folds · progressive disclosure ---------- */
+  details.fold{border:1px solid var(--line);background:var(--panel);border-radius:5px;margin:14px 0 0;overflow:hidden}
+  details.fold>summary{cursor:pointer;list-style:none;display:flex;gap:10px;align-items:center;padding:12px 16px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  details.fold>summary::-webkit-details-marker{display:none}
+  details.fold>summary::before{content:'▸';color:var(--red);flex:0 0 auto}
+  details.fold[open]>summary::before{content:'▾'}
+  details.fold>summary:hover{color:var(--gold2)}
+  details.fold>summary .hint{margin-left:auto;color:var(--dim);font-size:10px;letter-spacing:.06em;text-transform:none;font-style:italic;font-family:'EB Garamond',serif;text-align:right}
+  details.fold>.foldbody{padding:2px 16px 14px}
+  details.fold.bare{border:0;background:transparent}
+  details.fold.bare>summary{padding:10px 0}
+  details.fold.bare>.foldbody{padding:2px 0 6px}
+
+  /* ---------- guided cast flow ---------- */
+  .castflow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 4px}
+  .cstep{display:flex;gap:11px;align-items:center;border:1px solid var(--line);background:var(--panel);border-radius:5px;padding:11px 13px}
+  .cstep b.n{font-family:'Cinzel',serif;font-weight:800;font-size:19px;color:var(--gold2);width:30px;height:30px;flex:0 0 30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;background:#05050a}
+  .cstep span{font-size:13.5px;color:#ddd6c4;line-height:1.4}
+  .cstep span b{color:var(--gold2)}
+  :root[data-theme="light"] .cstep b.n{background:#fffdf6}
+  :root[data-theme="light"] .cstep span{color:#3a3020}
+
   /* ================= ACCESSIBILITY & THEME ================= */
   :root{--zoom:1}
   body{zoom:var(--zoom,1)}
@@ -214,6 +237,11 @@
   .navbtn:hover{color:var(--gold2);background:rgba(216,169,67,.1)}
   #themeBtn{border:1px solid var(--line);border-radius:4px;color:var(--gold2)}
   #themeBtn:hover{background:var(--gold);color:#100c02}
+  /* simple / full view toggle */
+  #modeBtn{border:1px solid var(--line);border-radius:4px;color:#9fe0ea}
+  #modeBtn:hover{background:var(--cyan);color:#04141a}
+  body.simple .simple-hide{display:none!important}
+  body.simple #oracle .grid2{grid-template-columns:1fr}
   /* slightly brighter dim text in dark mode for readability */
   :root[data-theme="dark"]{--dim:#9c947c}
   .chk{padding:0;appearance:none;font:inherit;line-height:1}
@@ -263,7 +291,7 @@
 <nav>
   <div class="brand">NATORI-ON-PSYFR <span>· Ophis × Chronicon</span></div>
   <div class="links">
-    <a href="#oracle" data-go="oracle">The Oracle</a><a href="#convergence" data-go="convergence">Convergence</a><a href="#wheels" data-go="wheels">The Wheels</a><a href="#ledger" data-go="ledger">The Ledger</a><a href="#about" data-go="about">Method</a><a href="PSYFR2.html" target="_blank" rel="noopener" style="color:var(--gold2)">📖 Field Guide</a>
+    <a href="#oracle" data-go="oracle">The Oracle</a><a href="#convergence" data-go="convergence">Convergence</a><a href="#wheels" data-go="wheels">The Wheels</a><a href="#ledger" data-go="ledger" class="simple-hide">The Ledger</a><a href="#about" data-go="about" class="simple-hide">Method</a><a href="PSYFR2.html" target="_blank" rel="noopener" style="color:var(--gold2)">📖 Field Guide</a>
   </div>
   <div class="navctl">
     <div class="tsize" role="group" aria-label="Text size">
@@ -271,6 +299,7 @@
       <button id="tsReset" class="navbtn" type="button" aria-label="Reset text size" title="Default text size">A</button>
       <button id="tsUp" class="navbtn" type="button" aria-label="Increase text size" title="Larger text">A+</button>
     </div>
+    <button id="modeBtn" class="navbtn" type="button" aria-pressed="false" title="Hide the deep panels — just seed, cast, and read">✦ Simple</button>
     <button id="themeBtn" class="navbtn" type="button" aria-label="Toggle light or dark theme" aria-pressed="false">☾ Dark</button>
   </div>
 </nav>
@@ -281,10 +310,10 @@
   <div class="eyebrow">Predictive Chronology Engine · 19-Operation Palindromic Cast</div>
   <h1>NATORI-ON-PSYFR</h1>
   <div class="tagline">The serpent that rings the egg of time · <em>138</em> lattice · <b>19</b> metonic · ⮌ mirror</div>
-  <p class="sub">Seed the cast with documented Chronicon events. Project them through nineteen palindromic operations. Every resulting date is scored against the real chronology — so the engine tells you when a projection lands on a Phoenix node, a documented cataclysm, a mirror-year, or your own signatures.</p>
+  <p class="sub">Seed anchor dates, cast them through the operation pack, and read which projections resonate with the chronology. First time here? The <a href="PSYFR2.html" target="_blank" rel="noopener" style="color:var(--gold2)">📖 Field Guide</a> is a five-minute tour.</p>
 </header>
 
-<div class="moment">
+<div class="moment simple-hide">
   <span class="y" id="mY">2026 CE</span>
   <span class="tag">Annus Mundi <b id="mAM">5920</b></span>
   <span class="tag">Long-Count yr <b id="mLC">5138</b></span>
@@ -302,7 +331,11 @@
 <section id="oracle">
   <div class="sec-no">I · The Oracle — the predictive cast</div>
   <h2>Seed it. Cast it. Read the resonance.</h2>
-  <p class="lead">Two or more <b>anchor dates</b> define intervals (Y, counted in axial rotations — days). The <b>operation pack</b> transforms each interval into projected dates. Each projection is then weighed against the Chronicon.</p>
+  <div class="castflow">
+    <div class="cstep"><b class="n">1</b><span><b>Seed</b> two or more anchor dates — type one in, or pick a documented event from the ledger menu.</span></div>
+    <div class="cstep"><b class="n">2</b><span><b>Cast</b> the oracle — every anchor pair runs through every operation.</span></div>
+    <div class="cstep"><b class="n">3</b><span><b>Read</b> the results — high scores and convergent dates are the signal.</span></div>
+  </div>
 
   <div class="grid2" style="margin-top:16px">
     <div class="panel">
@@ -326,20 +359,26 @@
       </div>
     </div>
 
-    <div class="panel">
-      <h3>⚙ The 19-Operation Pack <span style="margin-left:auto"><button class="btn sm" id="resetOps">reset 19</button></span></h3>
-      <div class="ph-sub">Each starts <span class="mono" style="color:var(--cyan)">X1+</span> or <span class="mono" style="color:var(--cyan)">X2+</span>, then arithmetic on <b>Y</b>. Constants: OPH_PHI · OPH_PI · OPH_CRV. Functions: oph_flip (mirror) · oph_round.</div>
-      <div class="rowlist" id="opList" style="max-height:300px;overflow:auto"></div>
-      <div class="addbar">
-        <div class="ctl" style="flex:1 1 100%"><label class="fld">Custom operation</label>
-          <input type="text" id="opInput" placeholder="X1+oph_flip(oph_round(Y/OPH_PHI))" spellcheck="false"></div>
-        <button class="btn cyan" id="addOp">+ Operation</button>
-      </div>
-      <div id="opErr" style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:6px;min-height:14px"></div>
+    <div class="panel simple-hide">
+      <h3>⚙ Operations <span style="margin-left:auto"><button class="btn sm" id="resetOps">reset 19</button></span></h3>
+      <div class="ph-sub">The 19-operation pack is loaded and ready — you can cast without touching anything here.</div>
+      <details class="fold bare">
+        <summary>View / edit the pack <span class="hint">19 equations · add your own</span></summary>
+        <div class="foldbody">
+          <div class="ph-sub">Each starts <span class="mono" style="color:var(--cyan)">X1+</span> or <span class="mono" style="color:var(--cyan)">X2+</span>, then arithmetic on <b>Y</b>. Constants: OPH_PHI · OPH_PI · OPH_CRV. Functions: oph_flip (mirror) · oph_round.</div>
+          <div class="rowlist" id="opList" style="max-height:300px;overflow:auto"></div>
+          <div class="addbar">
+            <div class="ctl" style="flex:1 1 100%"><label class="fld">Custom operation</label>
+              <input type="text" id="opInput" placeholder="X1+oph_flip(oph_round(Y/OPH_PHI))" spellcheck="false"></div>
+            <button class="btn cyan" id="addOp">+ Operation</button>
+          </div>
+          <div id="opErr" style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:6px;min-height:14px"></div>
+        </div>
+      </details>
     </div>
   </div>
 
-  <div class="sysrow">
+  <div class="sysrow simple-hide">
     <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase">Scoring lens</span>
     <div class="systog" id="sysTog">
       <button data-sys="V8" class="on">V8 · Chronology-first</button>
@@ -348,15 +387,20 @@
     <span class="sysnote" id="sysNote">V8 weights Phoenix nodes & documented events highest.</span>
   </div>
 
-  <div class="toolbar">
-    <div class="grp"><span class="glabel">Op packs</span><div id="packBar" style="display:flex;gap:6px;flex-wrap:wrap"></div></div>
-    <div class="sep"></div>
-    <div class="grp"><span class="glabel">Config</span>
-      <button class="btn sm" id="saveCfg">⤓ Save .json</button>
-      <button class="btn sm" id="loadCfg">⤒ Load</button>
-      <input type="file" id="loadFile" accept="application/json,.json" style="display:none">
+  <details class="fold simple-hide">
+    <summary>Advanced · themed op packs &amp; save / load <span class="hint">swap the 19 for a 138, Metonic, Phoenix or Golden pack · keep setups as .json</span></summary>
+    <div class="foldbody">
+      <div class="toolbar" style="border:0;background:transparent;padding:6px 0 0;margin:0">
+        <div class="grp"><span class="glabel">Op packs</span><div id="packBar" style="display:flex;gap:6px;flex-wrap:wrap"></div></div>
+        <div class="sep"></div>
+        <div class="grp"><span class="glabel">Config</span>
+          <button class="btn sm" id="saveCfg">⤓ Save .json</button>
+          <button class="btn sm" id="loadCfg">⤒ Load</button>
+          <input type="file" id="loadFile" accept="application/json,.json" style="display:none">
+        </div>
+      </div>
     </div>
-  </div>
+  </details>
 
   <div style="text-align:center;margin:8px 0">
     <button class="btn cast" id="castBtn">⟳ Cast the Oracle</button>
@@ -387,7 +431,7 @@
       <tbody id="resBody"><tr><td colspan="7" class="empty">Seed at least two anchors and cast the oracle.</td></tr></tbody>
     </table>
   </div></div>
-  <p style="font-size:13px;color:var(--dim);font-style:italic;margin-top:10px">Rows marked <span class="rt echo" style="font-size:8.5px">ECHO</span> land back on an input anchor — confirmations of the cast, not novel projections. Use <b style="color:var(--violet)">✦ NOVEL ONLY</b> to hide them and surface dates the chronology doesn't already name.</p>
+  <p class="simple-hide" style="font-size:13px;color:var(--dim);font-style:italic;margin-top:10px">Rows marked <span class="rt echo" style="font-size:8.5px">ECHO</span> land back on an input anchor — confirmations of the cast, not novel projections. Use <b style="color:var(--violet)">✦ NOVEL ONLY</b> to hide them and surface dates the chronology doesn't already name.</p>
 </section>
 
 
@@ -455,28 +499,36 @@
 </section>
 
 <!-- ============ III · THE LEDGER ============ -->
-<section id="ledger">
+<section id="ledger" class="simple-hide">
   <div class="sec-no">III · The Ledger — the documented chronology</div>
   <h2>The Chronicon event record</h2>
-  <p class="lead">The full dated spine of the Archaix thesis — <b id="ledgerCount">69</b> events. Click <b>seed</b> on any row to load it as an anchor with its date; click the row to read it on the wheels. Phoenix events sit exactly on the 138-lattice (mod 138 = 108).</p>
-  <div class="resbar" style="margin-top:14px">
-    <div class="filt" id="ledFilt">
-      <button data-k="all" class="on">ALL</button><button data-k="key">KEY</button>
-      <button data-k="phx">PHOENIX</button><button data-k="nem">NEMESIS</button>
-      <button data-k="ner">NER</button><button data-k="may">BAKTUN</button><button data-k="note">NOTES</button>
+  <p class="lead">The full dated spine of the Archaix thesis — <b id="ledgerCount">69</b> events. Click <b>seed</b> on any row to load it as an anchor with its date; click the row to read it on the wheels.</p>
+  <details class="fold">
+    <summary>Browse the event record <span class="hint">filter by Phoenix · Nemesis · NER · baktun · seed any row as an anchor</span></summary>
+    <div class="foldbody">
+      <div class="resbar" style="margin-top:10px">
+        <div class="filt" id="ledFilt">
+          <button data-k="all" class="on">ALL</button><button data-k="key">KEY</button>
+          <button data-k="phx">PHOENIX</button><button data-k="nem">NEMESIS</button>
+          <button data-k="ner">NER</button><button data-k="may">BAKTUN</button><button data-k="note">NOTES</button>
+        </div>
+      </div>
+      <div class="tbl-wrap"><div class="scroll" style="max-height:520px">
+        <table><thead><tr><th>Year</th><th>AM</th><th>Phx</th><th>Event</th><th></th></tr></thead>
+        <tbody id="ledBody"></tbody></table>
+      </div></div>
     </div>
-  </div>
-  <div class="tbl-wrap"><div class="scroll" style="max-height:520px">
-    <table><thead><tr><th>Year</th><th>AM</th><th>Phx</th><th>Event</th><th></th></tr></thead>
-    <tbody id="ledBody"></tbody></table>
-  </div></div>
+  </details>
 </section>
 
 <!-- ============ IV · METHOD ============ -->
-<section id="about">
+<section id="about" class="simple-hide">
   <div class="sec-no">IV · Method &amp; lineage</div>
   <h2>How the cast is weighed</h2>
   <p class="lead">NATORI-ON-PSYFR fuses two instruments: the <b>Ophis</b> predictive grammar (X-Dates → Y interval → operations → Z-Dates) and the <b>Chronicon</b> calendrics (the Breshears cycle lattice). The fusion is the scoring — and you can switch the lens.</p>
+  <details class="fold">
+  <summary>The scoring rules, constants &amp; the echo filter <span class="hint">what V8 / V7 reward, point by point</span></summary>
+  <div class="foldbody">
   <div class="grid2" style="margin-top:8px">
     <div class="panel"><h3>V8 · Chronology-first (default)</h3>
       <p style="font-size:14px">Rewards projections that land on the real timeline:</p>
@@ -514,6 +566,8 @@
       <p style="font-size:12.5px;color:var(--dim);font-style:italic;margin-top:6px">19 is in the resonance set at your request — it is not in the stock Ophis MSRF table.</p>
     </div>
   </div>
+  </div>
+  </details>
   <div class="note-card">
     <h4>The recursion, noted not asserted</h4>
     <p>NATORI-ON-PSYFR is a worldbuilding &amp; study instrument rendering the Archaix thesis of Jason Breshears (Archaix.com) as living predictive calendrics — the Chronicon, Doomsday Chronology, the 337 charts, the ANUNNA Files. The Shar-as-turning reckoning, Annus Mundi dating, and cycle lattice are presented as that thesis, not as established science. Deep-past conversions are cycle-true rather than historically observed. The 138-faced year LC 5138 wears the sigil through 2026 and never again before the count closes in 2046.</p>
@@ -1128,6 +1182,15 @@ document.querySelectorAll('nav a[data-go]').forEach(a=>a.onclick=()=>$(a.dataset
   $('tsUp').onclick=()=>{_zoom=Math.min(1.5,Math.round((_zoom+0.1)*10)/10);applyZoom(_zoom);};
   $('tsDown').onclick=()=>{_zoom=Math.max(0.8,Math.round((_zoom-0.1)*10)/10);applyZoom(_zoom);};
   $('tsReset').onclick=()=>{_zoom=1;applyZoom(_zoom);};
+
+  /* simple / full view (stored alongside the theme keys; the field guide ignores it) */
+  function applyMode(m){document.body.classList.toggle('simple',m==='simple');const b=$('modeBtn');
+    b.textContent=m==='simple'?'⛭ Full view':'✦ Simple';b.setAttribute('aria-pressed',m==='simple'?'true':'false');
+    try{localStorage.setItem('ophion-mode',m);}catch(e){}}
+  let _mode='full';try{if(localStorage.getItem('ophion-mode')==='simple')_mode='simple';}catch(e){}
+  applyMode(_mode);
+  $('modeBtn').onclick=()=>{_mode=(_mode==='simple')?'full':'simple';applyMode(_mode);
+    toast(_mode==='simple'?'Simple view — seed, cast, read. ⛭ restores everything.':'Full view restored');};
 
   /* preset / convergence wiring (runs here so $ and all handlers exist) */
   const pbar=$('packBar');

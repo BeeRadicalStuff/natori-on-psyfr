@@ -21,7 +21,8 @@ visible in the product.
 The two HTML files **cross-link by bare filename** (`PSYFR1.html` ↔ `PSYFR2.html`), so they
 MUST stay together in the same folder (`clocks/`) or the nav links break. They also share
 `localStorage` keys `ophion-theme` / `ophion-zoom` so theme + text-size carry across both —
-do **not** rename those keys.
+do **not** rename those keys. The engine alone also stores `ophion-mode` (`simple` | `full`,
+the ✦ Simple view toggle); the guide ignores it.
 
 ## HOW (work + verify)
 Verify-first is the core discipline. **Prove the math before touching UI**, and after any
@@ -53,7 +54,8 @@ Folder-specific rules for the engine live in `clocks/CLAUDE.md` and auto-load wh
 
 ## CONVENTIONS
 - **Single-file, air-gapped HTML** — no build step, no external requests, no localStorage for
-  app data beyond the two theme keys. (Browser storage APIs are otherwise avoided.)
+  app data beyond the three UI-preference keys (`ophion-theme`, `ophion-zoom`, `ophion-mode`).
+  (Browser storage APIs are otherwise avoided.)
 - **Separate display from logic** when renaming/rebranding: change visible text, cross-links,
   and download filenames; leave function names, IDs, and storage keys alone.
 - **Make surgical, line-targeted edits** and re-run the harnesses; don't hand-wave "it parses."
