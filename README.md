@@ -62,3 +62,8 @@ In Claude Code, type `/verify` any time to run the harnesses and get a pass/fail
 ## Note on the material
 This is a worldbuilding and study instrument presenting the Breshears/ARCHAIX thesis —
 not a claim of established science. That framing is stated inside the app itself.
+
+## License
+Use & Share, No Derivatives — you may run the app and share complete unmodified
+copies; you may not modify it, build derivative works from it, or sell it.
+See [LICENSE.txt](LICENSE.txt).

@@ -1,0 +1,36 @@
+NatorionOracle — NATORI-ON-PSYFR · The Predictive Chronology Engine
+Copyright (c) 2026 BeeRadicalStuff. All rights reserved.
+
+LICENSE — Use & Share, No Derivatives (v1.0)
+
+Permission is granted to any person who lawfully receives a copy of this
+software and its documentation (the "Work") to:
+
+  1. USE — run the Work, privately or publicly, free of charge;
+
+  2. SHARE — redistribute complete, unmodified, verbatim copies of the
+     Work, provided this license file and all copyright and attribution
+     notices are kept intact.
+
+The following are NOT permitted without prior written permission from the
+copyright holder:
+
+  a. MODIFYING the Work or creating derivative works from it, in whole or
+     in part — including translations, adaptations, ports, forks, or new
+     works that incorporate any portion of its code, text, or data;
+
+  b. SELLING the Work, or charging for access to it or for copies of it;
+
+  c. REMOVING or altering any copyright, attribution, or framing notice —
+     including the statement that the Work presents the ARCHAIX thesis of
+     Jason Breshears (Archaix.com) as a worldbuilding & study instrument,
+     not as established science.
+
+Viewing the source code (which is necessarily visible in a client-side
+HTML application) does not grant any license to reuse, copy, or adapt it.
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE WORK OR ITS USE.
